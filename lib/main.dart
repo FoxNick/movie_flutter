@@ -2,7 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/splash/splash_page.dart';
 import 'package:flutter_movie/pages/video/widgets/video_screen.dart';
-import 'package:flutter_movie/routers/application.dart';
+import 'package:flutter_movie/router/global_router.dart';
 import 'package:flutter_movie/routers/routers.dart';
 
 void main() => runApp(MyApp());

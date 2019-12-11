@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-import 'application.dart';
+import 'global_router.dart';
 import 'routers.dart';
 import 'package:quiver/strings.dart';
 
