@@ -30,6 +30,8 @@ dependencies:
   event_bus: ^1.1.0
   #网络图片缓存
   cached_network_image: ^1.1.1
+  # 路由框架 https://github.com/theyakka/fluro
+  fluro: ^1.5.0
 
 dev_dependencies:
   flutter_test:
