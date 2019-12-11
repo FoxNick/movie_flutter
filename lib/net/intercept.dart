@@ -157,21 +157,31 @@ class ProxyInterceptor extends Interceptor {
 
   @override
   onRequest(RequestOptions options) {
-    if (Conf.isDebug() && _dio != null) {
-      String ipPort = SpUtil.getString(Constant.proxy_ip_port);
-      if (isNotEmpty(ipPort)) {
-        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
-            .onHttpClientCreate =
-            (client) {
-          client.findProxy = (uri) {
-            // 用1个开关设置是否开启代理
-//            String proxy = 'PROXY ' + ipPort;
-//          String proxy = 'PROXY ' + "192.168.253.3:8888";//测试
-            return proxy;
-          };
-        };
-      }
-    }
+//    if (Conf.isDebug() && _dio != null) {
+//      String ipPort = SpUtil.getString(Constant.proxy_ip_port);
+//      if (isNotEmpty(ipPort)) {
+//        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+//            .onHttpClientCreate =
+//            (client) {
+//          client.findProxy = (uri) {
+//            // 用1个开关设置是否开启代理
+////            String proxy = 'PROXY ' + ipPort;
+////          String proxy = 'PROXY ' + "192.168.253.3:8888";//测试
+//            return proxy;
+//          };
+//        };
+//      }
+//    }
+
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+        .onHttpClientCreate =
+        (client) {
+      client.findProxy = (uri) {
+        // 用1个开关设置是否开启代理
+          String proxy = 'PROXY ' + "172.16.128.243:8888";//测试
+        return proxy;
+      };
+    };
 
     super.onRequest(options);
   }

@@ -93,12 +93,12 @@ class DioUtils {
       try {
         Map<String, dynamic> _map = json.decode((response.data ?? '').toString());
         _code = _map["code"];
-        _msg = _map["message"];
-        if (_map.containsKey("res") && _map["res"] != null) {
+        _msg = _map["msg"];
+        if (_map.containsKey("data") && _map["data"] != null) {
           if (T.toString() == "String") {
-            _data = _map["res"].toString() as T;
+            _data = _map["data"].toString() as T;
           } else {
-            _data = EntityFactory.generateOBJ(_map["res"]);
+            _data = EntityFactory.generateOBJ(_map["data"]);
           }
         }
         entity = BaseEntity(_code, _msg, _data);
@@ -150,8 +150,10 @@ class DioUtils {
       } else {
       _onError(result.code, result.message, onError);
       }
-    }, onError: (e, _) {
+    }, onError: (e, trace) {
       _cancelLogPrint(e, url);
+      print("解析网络返回的数据异常：" + e.toString());
+      print('堆栈信息如下：' + "\n" + trace.toString());
       Error error = ExceptionHandle.handleException(e);
       _onError(error.code, error.msg, onError);
     });
@@ -166,7 +168,7 @@ class DioUtils {
 
 
   _onError(int code, String msg, Function(int code, String mag) onError) {
-    Log.e("接口请求异常： code: $code, mag: $msg");
+    Log.e("接口请求异常： code: $code, msg: $msg");
     if (onError != null) {
       onError(code, msg);
     }
