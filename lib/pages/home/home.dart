@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/pages/movie/movie_page.dart';
 import 'package:flutter_movie/res/colors.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
 
@@ -13,7 +14,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   List<TabItem> _tabDatas;
   int _selIndex = 0;
-  List<Widget> _tabPages = List()..add(DemoPage())..add(DemoPage());
+  List<Widget> _tabPages = List()..add(CategoryTabPage())..add(DemoPage());
 
   ///构造tab的数据
   _initTabData() {
@@ -37,16 +38,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     print("home build");
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-                child: TabBarView(
-              children: _tabPages,
-              controller: _tabController,
-            )),
-            MyTabBar(_tabDatas, _tabController)
-          ],
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                  child: TabBarView(
+                    children: _tabPages,
+                    controller: _tabController,
+                  )),
+              MyTabBar(_tabDatas, _tabController)
+            ],
+          ),
         ),
       ),
     );
