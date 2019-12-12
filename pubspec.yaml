@@ -32,6 +32,12 @@ dependencies:
   cached_network_image: ^1.1.1
   # 路由框架 https://github.com/theyakka/fluro
   fluro: ^1.5.0
+  #加载动画
+  flutter_spinkit: "^4.0.0"
+  #Toast
+  toast: ^0.1.5
+  #轮播图
+  flutter_swiper: ^1.1.6
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,10 @@
 import 'package:flutter_movie/net/dio_utils.dart';
 import 'package:flutter_movie/net/net.dart';
 import 'package:flutter_movie/net/server.dart';
+import 'package:flutter_movie/pages/common/base_view.dart';
 import 'package:flutter_movie/pages/splash/bean/img_resp.dart';
 
-abstract class ISplashView {
+abstract class ISplashView extends IView {
   void onUrl(String imgUrl);
 }
 

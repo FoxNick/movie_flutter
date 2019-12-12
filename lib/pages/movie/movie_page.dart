@@ -1,95 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie/pages/home/home.dart';
-import 'package:flutter_movie/res/colors.dart';
+import 'package:flutter_movie/pages/common/base_state.dart';
+import 'package:flutter_movie/pages/movie/bean/movie_resp.dart';
+import 'package:flutter_movie/pages/movie/widgets/banner_widget.dart';
 
-import '../demo_page.dart';
+import 'movie_presenter.dart';
 
-///分类页面
-class CategoryTabPage extends StatefulWidget {
+///电影页面
+class MoviePage extends StatefulWidget {
   @override
-  _CategoryTabPageState createState() => _CategoryTabPageState();
+  _MoviePageState createState() => _MoviePageState();
 }
 
-class _CategoryTabPageState extends State<CategoryTabPage> with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  List<TabItem> _tabData;
-  List<Widget> _pages = List()..add(DemoPage())..add(DemoPage())..add(DemoPage())..add(DemoPage());
-
-  ///构造tab的数据
-  _initTabData() {
-    _tabData = List()
-      ..add(TabItem(null, null, "电影"))
-      ..add(TabItem(null, null, "电视剧"))
-      ..add(TabItem(null, null, "综艺"))
-      ..add(TabItem(null, null, "动漫"));
-  }
+class _MoviePageState extends BaseState<MoviePage>  implements IMovieView {
+  MoviePresenter _presenter;
+  MovieResp _movieResp;
 
   @override
   void initState() {
     super.initState();
-    _initTabData();
-
-    _tabController = TabController(initialIndex: 0, length: _tabData.length, vsync: this);
+    _presenter = MoviePresenter(this);
+    _presenter.requestMovieData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            MovieTabBar(_tabController, _tabData),
-            Expanded(
-              child: TabBarView(children: _pages, controller: _tabController,),
-            )
-          ],
-        ),
-      ),
-    );
+    return super.build(context);
   }
-}
-
-class MovieTabBar extends StatefulWidget {
-  final TabController tabController;
-  final List<TabItem> tabData;
-
-  MovieTabBar(this.tabController, this.tabData);
 
   @override
-  _MovieTabBarState createState() => _MovieTabBarState();
-}
-
-class _MovieTabBarState extends State<MovieTabBar> {
-  int _selIndex;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildUI(BuildContext context) {
     return Container(
-      child: TabBar(
-        tabs: _tabs(),
-        controller: widget.tabController,
-        onTap: (index) {
-          if (index != _selIndex) {
-            setState(() {
-              _selIndex = index;
-            });
-          }
-        },
-      ),
+      child: BannerWidget(banners: _movieResp?.banners,),
     );
   }
 
-  List<Widget> _tabs() {
-    List<Widget> _tabs = List();
-    for (int i = 0; i < widget.tabData.length; i++) {
-      _tabs.add(Container(
-        padding: EdgeInsets.only(top: 10, bottom: 5),
-        child: Text(
-          widget.tabData[i].title,
-          style: TextStyle(color: _selIndex == i ? Colours.text_normal : Colours.text_gray_6, fontSize: 15),
-        ),
-      ));
-    }
-    return _tabs;
+  @override
+  void onDataSuccess(MovieResp movieResp) {
+    setState(() {
+      _movieResp = movieResp;
+    });
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
+
+
 }
+

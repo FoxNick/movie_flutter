@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie/pages/movie/movie_page.dart';
+import 'package:flutter_movie/pages/category/category_page.dart';
 import 'package:flutter_movie/res/colors.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
 
