@@ -1,9 +1,10 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_movie/pages/splash/splash_page.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_movie/pages/home/home.dart';
 import 'package:flutter_movie/pages/video/widgets/video_screen.dart';
 import 'package:flutter_movie/router/global_router.dart';
-import 'package:flutter_movie/routers/routers.dart';
+import 'package:flutter_movie/router/routers.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,9 +13,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _setStatusBar();
+
     return MaterialApp(
-      home: SplashPage(),
+//      home: SplashPage(),
+      home: Home(),
     );
+  }
+
+  ///设置状态栏
+  _setStatusBar() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+      statusBarColor: Colors.transparent,//装天栏背景透明
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));
   }
 
   MyApp() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_movie/pages/splash/splash_presenter.dart';
 import 'package:flutter_movie/res/colors.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
@@ -18,6 +19,9 @@ class _SplashPageState extends State<SplashPage> implements ISplashView{
     _presenter = new SplashPagePresenter(this);
     _presenter.requestImg();
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
