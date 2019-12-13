@@ -178,7 +178,7 @@ class ProxyInterceptor extends Interceptor {
         (client) {
       client.findProxy = (uri) {
         // 用1个开关设置是否开启代理
-          String proxy = 'PROXY ' + "172.16.128.86:8888";//测试
+          String proxy = 'PROXY ' + "172.16.128.103:8888";//测试
         return proxy;
       };
     };

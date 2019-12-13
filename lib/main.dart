@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_movie/pages/home/home.dart';
 import 'package:flutter_movie/pages/video/widgets/video_screen.dart';
 import 'package:flutter_movie/router/global_router.dart';
 import 'package:flutter_movie/router/routers.dart';
+import 'package:flutter_movie/utils/adapt_ui.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _setStatusBar();
+    //初始化ui适配器
+    UIAdaptor.init(MediaQueryData.fromWindow(window));
 
     return MaterialApp(
 //      home: SplashPage(),

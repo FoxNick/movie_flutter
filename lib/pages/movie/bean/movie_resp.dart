@@ -65,7 +65,7 @@ class Movie {
   String name;
   double rank;
   String cover;
-  Null type;
+  String type;
 
   Movie({this.id, this.name, this.rank, this.cover, this.type});
 

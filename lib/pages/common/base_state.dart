@@ -56,7 +56,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Automat
   showStatus(int status) {
     if (mounted && status != statusType) {
       setState(() {
-        status = statusType;
+        statusType = status;
       });
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/movie/bean/movie_resp.dart';
 import 'package:flutter_movie/res/colors.dart';
+import 'package:flutter_movie/utils/adapt_ui.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
 import 'package:quiver/strings.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -28,7 +29,7 @@ class _BannerWidgetState extends State<BannerWidget> {
         ? SizedBox()
         : Container(
             width: double.infinity,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(UIAdaptor.w(20)),
             color: Colours.color_F3F5F7,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
