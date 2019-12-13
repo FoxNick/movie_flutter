@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/pages/movie/router/movie_router.dart';
 import 'package:flutter_movie/router/router_init.dart';
 
 import '../main.dart';
@@ -38,7 +39,7 @@ class Routes {
     _listRouter.clear();
 
     /// 各自路由由各自模块管理，统一在此添加初始化
-//    _listRouter.add(ExampleRouter());
+    _listRouter.add(MovieRouter());
 
 
     /// 初始化路由

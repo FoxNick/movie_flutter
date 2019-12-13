@@ -2,8 +2,10 @@ import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/movie/bean/movie_resp.dart';
+import 'package:flutter_movie/pages/movie/router/movie_router.dart';
 import 'package:flutter_movie/res/colors.dart';
 import 'package:flutter_movie/res/dimens.dart';
+import 'package:flutter_movie/router/fluro_navigator.dart';
 import 'package:flutter_movie/utils/adapt_ui.dart';
 import 'package:flutter_movie/utils/array_util.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
@@ -49,14 +51,11 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
                     ],
                   ),
                 ), //头部标题
-                IgnorePointer(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        left: UIAdaptor.w(20), right: UIAdaptor.w(20)),
-                    child: _moviesGrid(widget?.movies?.list),
-                  ),
-                )
-              ],
+                Container(
+                  margin: EdgeInsets.only(
+                      left: UIAdaptor.w(20), right: UIAdaptor.w(20)),
+                  child: _moviesGrid(widget?.movies?.list),
+                )              ],
             ),
           );
   }
@@ -102,7 +101,7 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
   ///网格显示电影
   Widget _moviesGrid(List<Movie> movieList) {
     return GridView.builder(
-      controller: null,
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -111,26 +110,31 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
           childAspectRatio: 0.6),
       itemBuilder: (context, index) {
         Movie movie = movieList[index];
-        return Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: _coverWidget(movie),
-              ), //封面
-              Container(
-                color: Colours.white,
-                child: Text(
-                  movie.name ?? '',
-                  style: TextStyle(
-                      fontSize: FontSize.normal, color: Colours.text_normal),
-                  maxLines: 1,
-                  textAlign: TextAlign.end,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ) //电影名称
-            ],
+        return GestureDetector(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: _coverWidget(movie),
+                ), //封面
+                Container(
+                  color: Colours.white,
+                  child: Text(
+                    movie.name ?? '',
+                    style: TextStyle(
+                        fontSize: FontSize.normal, color: Colours.text_normal),
+                    maxLines: 1,
+                    textAlign: TextAlign.end,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ) //电影名称
+              ],
+            ),
           ),
+          onTap: (){
+            NavigatorUtils.push(context, MovieRouter.movieDetail, params: Map()..['movieId'] = movie?.id?.toString());
+          },
         );
       },
       itemCount: movieList?.length ?? 0,

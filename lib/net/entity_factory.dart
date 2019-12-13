@@ -1,4 +1,5 @@
 
+import 'package:flutter_movie/pages/movie/bean/movie_detail_resp.dart';
 import 'package:flutter_movie/pages/movie/bean/movie_resp.dart';
 import 'package:flutter_movie/pages/splash/bean/img_resp.dart';
 
@@ -9,7 +10,10 @@ class EntityFactory {
       return ImgResp.fromJson(json) as T;
     } else if (T.toString() == "MovieResp") {
       return MovieResp.fromJson(json) as T;
+    } else if (T.toString() == "MovieDetailInfo") {
+      return MovieDetailInfo.fromJson(json) as T;
     }
+
     return null;
   }
 }

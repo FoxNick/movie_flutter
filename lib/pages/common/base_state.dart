@@ -30,13 +30,15 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Automat
             },
           );
     return Scaffold(
-      body: Container(
-        child: _isShowLoading
-            ? LoadingWidget(
-                isSHow: true,
-                child: withStatusWidget,
-              )
-            : withStatusWidget,
+      body: SafeArea(
+        child: Container(
+          child: _isShowLoading
+              ? LoadingWidget(
+            isSHow: true,
+            child: withStatusWidget,
+          )
+              : withStatusWidget,
+        ),
       ),
     );
   }
