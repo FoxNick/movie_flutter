@@ -21,6 +21,8 @@ class UIAdaptor {
   static double _ratioW;
   static double _ratioH;
 
+  static double _textScaleFactor;
+
 
   static init(MediaQueryData mediaQueryData, {double uiW = 750, double uiH = 1334}) {
     assert(mediaQueryData != null);
@@ -32,6 +34,7 @@ class UIAdaptor {
     _uiH = uiH;
     _ratioW = _screenW / _uiW;
     _ratioH = _screenH / _uiH;
+    _textScaleFactor = mediaQueryData.textScaleFactor;//字体的一个逻辑像素对应多少实际像素
   }
 
   ///
@@ -49,10 +52,19 @@ class UIAdaptor {
   }
 
   ///
+  /// 设置字体
+  ///
+  static double sp(int fontSize) {
+    return fontSize * _ratioW / _textScaleFactor;
+  }
+
+  ///
   /// 1像素对应的尺寸
   ///
   static double onePx() {
     return 1 / (_ratioW <= 0 ? 1 : _ratioW);
   }
+
+
 
 }

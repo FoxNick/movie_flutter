@@ -1,3 +1,5 @@
+import 'dart:ui' as prefix0;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/movie/bean/movie_resp.dart';
 import 'package:flutter_movie/res/colors.dart';
@@ -19,39 +21,44 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
   @override
   Widget build(BuildContext context) {
     bool isEmpty = ArrayUtil.isEmpty(widget.movies?.list);
-
-    return isEmpty ? SizedBox() : Container(
-      margin: EdgeInsets.only(top: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: UIAdaptor.w(5), right: UIAdaptor.w(10), left: UIAdaptor.w(20)),
-            child: Row(
+    return isEmpty
+        ? SizedBox()
+        : Container(
+            margin: EdgeInsets.only(top: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _titleWidget(widget?.movies?.typeName),
-                Expanded(
-                  child: SizedBox(),
-                  flex: 1,
-                ),
-                GestureDetector(
-                  child: _rightWidget(),
-                  onTap: () {
-                    //查看更多
-                  },
+                Container(
+                  margin: EdgeInsets.only(
+                      bottom: UIAdaptor.w(5),
+                      right: UIAdaptor.w(10),
+                      left: UIAdaptor.w(20)),
+                  child: Row(
+                    children: <Widget>[
+                      _titleWidget(widget?.movies?.typeName),
+                      Expanded(
+                        child: SizedBox(),
+                        flex: 1,
+                      ),
+                      GestureDetector(
+                        child: _rightWidget(),
+                        onTap: () {
+                          //查看更多
+                        },
+                      )
+                    ],
+                  ),
+                ), //头部标题
+                IgnorePointer(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        left: UIAdaptor.w(20), right: UIAdaptor.w(20)),
+                    child: _moviesGrid(widget?.movies?.list),
+                  ),
                 )
               ],
             ),
-          ), //头部标题
-          IgnorePointer(
-            child: Container(
-              margin: EdgeInsets.only(left: UIAdaptor.w(20), right: UIAdaptor.w(20)),
-              child: _moviesGrid(widget?.movies?.list),
-            ),
-          )
-        ],
-      ),
-    );
+          );
   }
 
   ///模块的标题
@@ -72,16 +79,21 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(right: 0),
           child: Text(
             '查看更多',
             style: TextStyle(
                 fontSize: FontSize.normal, color: Colours.text_gray_6),
+            textAlign: TextAlign.center,
           ),
         ),
-        Icon(
-          Icons.chevron_right,
-          color: Colours.text_gray_6,
+        Container(
+          margin: EdgeInsets.only(right: UIAdaptor.w(20)),
+          child: Icon(
+            Icons.chevron_right,
+            color: Colours.text_gray_6,
+            textDirection: prefix0.TextDirection.ltr,
+            size: UIAdaptor.sp(40),
+          ),
         )
       ],
     );
@@ -136,7 +148,8 @@ class _MoviesModuleWidgetState extends State<MoviesModuleWidget> {
             height: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              child: ImageUtil.loadNetworkImage(movie?.cover, fit: BoxFit.cover),
+              child:
+                  ImageUtil.loadNetworkImage(movie?.cover, fit: BoxFit.cover),
             ),
           ),
           Container(

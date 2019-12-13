@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/category/category_page.dart';
 import 'package:flutter_movie/res/colors.dart';
+import 'package:flutter_movie/res/dimens.dart';
+import 'package:flutter_movie/utils/adapt_ui.dart';
 import 'package:flutter_movie/utils/image_utils.dart';
 
 import '../demo_page.dart';
@@ -112,8 +114,8 @@ class _MyTabBarState extends State<MyTabBar> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: 25,
-              height: 25,
+              width: UIAdaptor.w(50),
+              height: UIAdaptor.w(50),
               child: _selIndex == i
                   ? widget.tabData[i].selIcon
                   : widget.tabData[i].unSelIcon,
@@ -122,7 +124,7 @@ class _MyTabBarState extends State<MyTabBar> {
               widget.tabData[i].title,
               style: TextStyle(
                   color:
-                      _selIndex == i ? Colours.app_main : Colours.text_normal),
+                      _selIndex == i ? Colours.app_main : Colours.text_normal, fontSize: FontSize.normal),
             )
           ],
         ),

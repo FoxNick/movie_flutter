@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie/pages/home/home.dart';
 import 'package:flutter_movie/pages/movie/movie_page.dart';
 import 'package:flutter_movie/res/colors.dart';
+import 'package:flutter_movie/res/dimens.dart';
 import 'package:flutter_movie/utils/adapt_ui.dart';
 
 import '../demo_page.dart';
@@ -88,7 +89,7 @@ class _MovieTabBarState extends State<MovieTabBar> {
         padding: EdgeInsets.only(top: UIAdaptor.h(10), bottom: UIAdaptor.h(5)),
         child: Text(
           widget.tabData[i].title,
-          style: TextStyle(color: _selIndex == i ? Colours.text_normal : Colours.text_gray_6, fontSize: 15),
+          style: TextStyle(color: _selIndex == i ? Colours.text_normal : Colours.text_gray_6, fontSize: FontSize.secondTitle),
         ),
       ));
     }
